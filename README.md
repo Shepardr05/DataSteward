@@ -1,23 +1,22 @@
 # Agente Data Steward — ReAct con Ollama
 
-**Versión beta para la entrega de Agentic AI.** Audita la calidad de un CSV,
+**Versión beta para la entrega** Audita la calidad de un CSV,
 identifica problemas y recomienda acciones usando un agente ReAct con dos
-herramientas. Esta carpeta contiene la implementación del equipo; puede
-ejecutarse por separado del repositorio del tutorial.
+herramientas.
 
 **Modelo:** `llama3:instruct` · **Proveedor:** Ollama local · **Framework:**
 LangChain · **Python:** 3.12 · **API key de OpenAI:** no requerida.
 
-## Dónde revisar cada requisito
+## Dónde revisar cada elemento
 
-| Requisito de la consigna | Archivo o evidencia |
+| Elemento | Archivo o evidencia |
 |---|---|
 | Código principal del agente ReAct | [agente_data_steward.py](agente_data_steward.py), función `run_audit` |
 | Prompt preliminar de Data Steward | [prompt_data_steward.txt](prompt_data_steward.txt); síntesis en [prompt_reporte.txt](prompt_reporte.txt) |
 | Modelo seleccionado | `ChatOllama` en `agente_data_steward.py` |
 | Dos herramientas | `perfilar_dataset` y `validar_reglas`, registradas en `build_tools`; cálculos en [steward_tools.py](steward_tools.py) |
 | Herramientas utilizadas durante la ejecución | Eventos `[TOOL START]` y `[TOOL END]` de ambas herramientas en la terminal |
-| Código en el repositorio del equipo | Subir esta carpeta al repositorio y compartir su enlace |
+
 
 ## Instalar uv y Ollama en Windows
 
@@ -159,14 +158,8 @@ uv run python verificar_beta.py
 
 Las diecinueve pruebas verifican cálculos, llamadas de herramientas y controles del
 ciclo con respuestas del modelo **simuladas**. No sustituyen una ejecución
-real de LLaMA. Para la entrega deben ejecutar la demo en su PC y comprobar
-`estado: completado` y ambas herramientas en `auditoria_resultado.json`.
-El programa detiene el ciclo al alcanzar diez iteraciones y registra ese
-estado como `limite_alcanzado`, sin presentarlo como éxito.
+real de LLaMA. El programa detiene el ciclo al alcanzar diez iteraciones y registra ese estado como `limite_alcanzado`, sin presentarlo como éxito.
 
-La carpeta no se ha publicado en el repositorio del equipo. Antes de entregar,
-suban el código y capturen una ejecución real que muestre las dos herramientas.
-No incluyan `.venv`, `.env` ni datasets personales.
 
 ## Corrección de la beta: entradas de herramientas
 
