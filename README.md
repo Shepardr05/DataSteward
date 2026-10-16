@@ -19,16 +19,92 @@ LangChain · **Python:** 3.12 · **API key de OpenAI:** no requerida.
 | Herramientas utilizadas durante la ejecución | Eventos `[TOOL START]` y `[TOOL END]` de ambas herramientas en la terminal |
 | Código en el repositorio del equipo | Subir esta carpeta al repositorio y compartir su enlace |
 
-## Ejecutar la demostración
+## Instalar uv y Ollama en Windows
 
-Requisitos externos: `uv` instalado y Ollama abierto. Descarga el modelo una
-sola vez, si aún no lo tienes:
+Realiza la instalación en **Windows PowerShell**. Si alguna herramienta ya
+está instalada, comprueba su versión y continúa con el siguiente paso.
+
+### 1. Instalar uv
+
+`uv` instala las dependencias y administra el entorno de Python del proyecto.
+Ejecuta el instalador oficial:
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Cierra PowerShell y abre una ventana nueva. Si usas VS Code, cierra todas sus
+ventanas y vuelve a abrirlo para que las terminales reconozcan el nuevo `PATH`.
+Comprueba la instalación:
+
+```powershell
+uv --version
+```
+
+Si aparece `uv is not recognized`, prueba la ruta habitual del instalador:
+
+```powershell
+& "$env:USERPROFILE\.local\bin\uv.exe" --version
+```
+
+Si esta ruta muestra la versión, puedes utilizarla en los comandos posteriores.
+La instalación de dependencias con `uv sync --locked` utilizará Python 3.12,
+según los archivos del proyecto, y podrá descargarlo si hace falta.
+
+Documentación oficial: [instalación de uv](https://docs.astral.sh/uv/getting-started/installation/).
+
+### 2. Instalar Ollama
+
+Ollama ejecuta el modelo de lenguaje en tu computadora. En PowerShell ejecuta:
+
+```powershell
+irm https://ollama.com/install.ps1 | iex
+```
+
+Como alternativa, descarga y ejecuta el instalador desde
+[Ollama para Windows](https://ollama.com/download/windows).
+Elige solo uno de los dos métodos de instalación.
+
+Al terminar, abre Ollama desde el menú Inicio. Cierra y vuelve a abrir
+PowerShell o todas las ventanas de VS Code. Comprueba:
+
+```powershell
+ollama --version
+```
+
+Si el comando no se reconoce, prueba la ubicación habitual de instalación:
+
+```powershell
+& "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" --version
+```
+
+### 3. Descargar el modelo del proyecto
+
+Con Ollama abierto, descarga `llama3:instruct` una sola vez. Esta descarga
+requiere conexión a internet y puede tardar varios minutos:
 
 ```powershell
 ollama pull llama3:instruct
+ollama list
 ```
 
-En VS Code abre **esta carpeta** y en la terminal ejecuta:
+Comprueba que `llama3:instruct` aparezca en la lista. Si necesitas la ruta
+completa, usa:
+
+```powershell
+& "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" pull llama3:instruct
+& "$env:LOCALAPPDATA\Programs\Ollama\ollama.exe" list
+```
+
+Si aparece un error de conexión con el servidor, comprueba que Ollama esté
+abierto. También puedes iniciarlo con `ollama serve` en otra terminal y
+mantenerla abierta mientras ejecutas la demostración.
+
+## Ejecutar la demostración
+
+Con `uv` instalado y Ollama abierto con el modelo descargado, abre **esta
+carpeta** en VS Code. La terminal debe estar en la carpeta que contiene
+`pyproject.toml` y `agente_data_steward.py`. Ejecuta:
 
 ```powershell
 uv sync --locked
