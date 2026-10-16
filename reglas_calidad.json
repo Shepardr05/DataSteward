@@ -1,0 +1,8 @@
+{
+  "required_columns": ["id_cliente", "nombre", "email", "edad", "pais", "fecha_alta"],
+  "unique_columns": ["id_cliente"],
+  "numeric_ranges": {"edad": {"min": 0, "max": 120}},
+  "allowed_values": {"pais": ["MX", "CO", "ES"]},
+  "date_formats": {"fecha_alta": "%Y-%m-%d"},
+  "email_columns": ["email"]
+}

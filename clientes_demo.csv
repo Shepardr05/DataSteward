@@ -1,0 +1,13 @@
+id_cliente,nombre,email,edad,pais,fecha_alta
+C001,Ana Demo,ana@example.com,25,MX,2026-01-10
+C002,Bruno Demo,bruno@example.com,32,MX,2026-02-15
+C003,,carla@example.com,28,CO,2026-03-01
+C004,Diego Demo,diego.example.com,40,MX,2026-03-05
+C005,Elena Demo,elena@example.com,-5,ES,2026-03-12
+C006,Fernando Demo,fernando@example.com,150,MX,2026-03-15
+C007,Gina Demo,gina@example.com,29,XX,2026-04-01
+C008,Hugo Demo,hugo@example.com,36,CO,2026-02-30
+C002,Iris Demo,iris@example.com,27,MX,2026-04-10
+C010,Julia Demo,,24,ES,2026-04-12
+C001,Ana Demo,ana@example.com,25,MX,2026-01-10
+C012,Leo Demo,leo@example.com,treinta,MX,2026-04-15

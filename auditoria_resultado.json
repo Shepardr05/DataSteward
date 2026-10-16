@@ -1,0 +1,191 @@
+{
+  "estado": "completado",
+  "modelo": "llama3:instruct",
+  "iteraciones": 3,
+  "herramientas_ejecutadas": [
+    "perfilar_dataset",
+    "validar_reglas"
+  ],
+  "evidencia": {
+    "perfilar_dataset": {
+      "archivo": "clientes_demo.csv",
+      "filas": 12,
+      "columnas": 6,
+      "duplicados_completos_excedentes": 1,
+      "perfil_columnas": {
+        "id_cliente": {
+          "nulos": 0,
+          "valores_distintos_no_nulos": 10,
+          "tipo_aparente": "texto"
+        },
+        "nombre": {
+          "nulos": 1,
+          "valores_distintos_no_nulos": 10,
+          "tipo_aparente": "texto"
+        },
+        "email": {
+          "nulos": 1,
+          "valores_distintos_no_nulos": 10,
+          "tipo_aparente": "texto"
+        },
+        "edad": {
+          "nulos": 0,
+          "valores_distintos_no_nulos": 11,
+          "tipo_aparente": "texto"
+        },
+        "pais": {
+          "nulos": 0,
+          "valores_distintos_no_nulos": 4,
+          "tipo_aparente": "texto"
+        },
+        "fecha_alta": {
+          "nulos": 0,
+          "valores_distintos_no_nulos": 11,
+          "tipo_aparente": "texto"
+        }
+      },
+      "nota": "Tipos inferidos, no esquema de negocio. Nulos: vacío, null, none, nan y n/a. No se altera el CSV."
+    },
+    "validar_reglas": {
+      "archivo": "clientes_demo.csv",
+      "filas": 12,
+      "estado": "con_hallazgos",
+      "reglas_aplicadas": {
+        "required_columns": [
+          "id_cliente",
+          "nombre",
+          "email",
+          "edad",
+          "pais",
+          "fecha_alta"
+        ],
+        "unique_columns": [
+          "id_cliente"
+        ],
+        "numeric_ranges": {
+          "edad": {
+            "min": 0,
+            "max": 120
+          }
+        },
+        "allowed_values": {
+          "pais": [
+            "MX",
+            "CO",
+            "ES"
+          ]
+        },
+        "date_formats": {
+          "fecha_alta": "%Y-%m-%d"
+        },
+        "email_columns": [
+          "email"
+        ]
+      },
+      "hallazgos": [
+        {
+          "regla": "valor_obligatorio",
+          "columna": "nombre",
+          "prioridad": "alta",
+          "cantidad": 1,
+          "registros_ejemplo": [
+            4
+          ]
+        },
+        {
+          "regla": "valor_obligatorio",
+          "columna": "email",
+          "prioridad": "alta",
+          "cantidad": 1,
+          "registros_ejemplo": [
+            11
+          ]
+        },
+        {
+          "regla": "valor_no_unico",
+          "columna": "id_cliente",
+          "prioridad": "alta",
+          "cantidad": 4,
+          "registros_ejemplo": [
+            2,
+            3,
+            10,
+            12
+          ]
+        },
+        {
+          "regla": "numero_invalido",
+          "columna": "edad",
+          "prioridad": "media",
+          "cantidad": 1,
+          "registros_ejemplo": [
+            13
+          ]
+        },
+        {
+          "regla": "fuera_de_rango",
+          "columna": "edad",
+          "prioridad": "media",
+          "cantidad": 2,
+          "registros_ejemplo": [
+            6,
+            7
+          ]
+        },
+        {
+          "regla": "fuera_de_catalogo",
+          "columna": "pais",
+          "prioridad": "media",
+          "cantidad": 1,
+          "registros_ejemplo": [
+            8
+          ]
+        },
+        {
+          "regla": "fecha_invalida",
+          "columna": "fecha_alta",
+          "prioridad": "media",
+          "cantidad": 1,
+          "registros_ejemplo": [
+            9
+          ]
+        },
+        {
+          "regla": "formato_email_invalido",
+          "columna": "email",
+          "prioridad": "media",
+          "cantidad": 1,
+          "registros_ejemplo": [
+            5
+          ]
+        },
+        {
+          "regla": "duplicado_completo_excedente",
+          "columna": "*",
+          "prioridad": "media",
+          "cantidad": 1,
+          "registros_ejemplo": [
+            12
+          ]
+        }
+      ],
+      "filas_con_algun_hallazgo": 12,
+      "columnas_ausentes": [],
+      "nota": "Índices de registros lógicos: encabezado=1. No sumar conteos de reglas: pueden solaparse. Unicidad marca todas las apariciones; duplicado completo solo las excedentes. Email: formato básico, no existencia. Sin hallazgos no garantiza calidad total."
+    }
+  },
+  "reporte_modelo": "{\"acciones\": {\"H1\": \"Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor obligatorio en la columna 'nombre' en el registro 4.\", \"H2\": \"Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor obligatorio en la columna 'email' en el registro 11.\", \"H3\": \"Revisar la fuente y confirmar reglas con el responsable del negocio para depurar la no unicidad en la columna 'id_cliente' en los registros 2, 3, 10 y 12.\", \"H4\": \"Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el número inválido en la columna 'edad' en el registro 13.\", \"H5\": \"Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor fuera del rango en la columna 'edad' en los registros 6 y 7.\", \"H6\": \"Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor fuera del catálogo en la columna 'pais' en el registro 8.\", \"H7\": \"Revisar la fuente y confirmar reglas con el responsable del negocio para depurar la fecha inválida en la columna 'fecha_alta' en el registro 9.\", \"H8\": \"Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el formato de email inválido en la columna 'email' en el registro 5.\", \"H9\": \"Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el duplicado completo excedente en el registro 12.\"}}",
+  "recomendaciones_modelo": {
+    "H1": "Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor obligatorio en la columna 'nombre' en el registro 4.",
+    "H2": "Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor obligatorio en la columna 'email' en el registro 11.",
+    "H3": "Revisar la fuente y confirmar reglas con el responsable del negocio para depurar la no unicidad en la columna 'id_cliente' en los registros 2, 3, 10 y 12.",
+    "H4": "Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el número inválido en la columna 'edad' en el registro 13.",
+    "H5": "Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor fuera del rango en la columna 'edad' en los registros 6 y 7.",
+    "H6": "Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor fuera del catálogo en la columna 'pais' en el registro 8.",
+    "H7": "Revisar la fuente y confirmar reglas con el responsable del negocio para depurar la fecha inválida en la columna 'fecha_alta' en el registro 9.",
+    "H8": "Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el formato de email inválido en la columna 'email' en el registro 5.",
+    "H9": "Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el duplicado completo excedente en el registro 12."
+  },
+  "reporte_final": "Reporte de calidad de datos\n\nRESUMEN VERIFICADO\nArchivo: clientes_demo.csv\nFilas: 12 | Columnas: 6\nEstado de la validación: con_hallazgos\nHallazgos verificados: 9 | Alta: 3 | Media: 6\nFilas con algún hallazgo: 12\n\nHALLAZGOS VERIFICADOS (cifras y prioridades calculadas por Python)\nID | Regla | Columna | Cantidad | Prioridad\nH1 | valor_obligatorio | nombre | 1 | alta\nH2 | valor_obligatorio | email | 1 | alta\nH3 | valor_no_unico | id_cliente | 4 | alta\nH4 | numero_invalido | edad | 1 | media\nH5 | fuera_de_rango | edad | 2 | media\nH6 | fuera_de_catalogo | pais | 1 | media\nH7 | fecha_invalida | fecha_alta | 1 | media\nH8 | formato_email_invalido | email | 1 | media\nH9 | duplicado_completo_excedente | * | 1 | media\n\nRECOMENDACIONES DEL MODELO (sugerencias sujetas a revisión)\nH1 [alta]: Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor obligatorio en la columna 'nombre' en el registro 4.\nH2 [alta]: Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor obligatorio en la columna 'email' en el registro 11.\nH3 [alta]: Revisar la fuente y confirmar reglas con el responsable del negocio para depurar la no unicidad en la columna 'id_cliente' en los registros 2, 3, 10 y 12.\nH4 [media]: Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el número inválido en la columna 'edad' en el registro 13.\nH5 [media]: Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor fuera del rango en la columna 'edad' en los registros 6 y 7.\nH6 [media]: Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el valor fuera del catálogo en la columna 'pais' en el registro 8.\nH7 [media]: Revisar la fuente y confirmar reglas con el responsable del negocio para depurar la fecha inválida en la columna 'fecha_alta' en el registro 9.\nH8 [media]: Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el formato de email inválido en la columna 'email' en el registro 5.\nH9 [media]: Revisar la fuente y confirmar reglas con el responsable del negocio para depurar el duplicado completo excedente en el registro 12.\n\nLÍMITES\nLos hallazgos pueden solaparse: sus cantidades no se suman para contar filas afectadas.\nUnicidad cuenta todas las apariciones repetidas; duplicados completos solo las copias excedentes.\nLos índices de ejemplo incluyen el encabezado como registro 1.\nReglas preliminares a confirmar con el negocio; email comprueba formato, no existencia.\nEl CSV no se modificó. No se garantiza la calidad fuera de las reglas comprobadas.\nSe valida la estructura y cobertura de las recomendaciones, no la corrección semántica de cada sugerencia.",
+  "proveedor": "Ollama local"
+}
